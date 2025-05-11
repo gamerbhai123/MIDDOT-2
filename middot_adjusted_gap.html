@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MIDDOT Tasks</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px 10px;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .title {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    .coins {
+      font-size: 0.95em;
+    }
+    .summary {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 10px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+    .arrow {
+      text-align: center;
+      font-size: 1.5em;
+      animation: bounce 1s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+    .task-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 12px 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+    button {
+      min-width: 100px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    button:hover {
+      transform: scale(1.05);
+    }
+    .yellow {
+      background: yellow !important;
+      color: black !important;
+    }
+    .voucher-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+      gap: 15px;
+    }
+    .voucher-card {
+      width: 95%; max-width: 360px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px 10px;
+      margin-bottom: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+    .voucher-card h2 {
+      margin: 10px 0;
+      font-size: 1.2em;
+    }
+    .voucher-card p {
+      margin: 5px 0 15px;
+      font-size: 1em;
+    }
+    .voucher-card button {
+      width: 95%; max-width: 360px;
+      padding: 12px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      font-size: 1em;
+    }
+    .message {
+      color: red;
+      font-size: 0.85em;
+      padding-top: 5px;
+      min-height: 18px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="title">MIDDOT</div>
+    <div class="coins" id="coinCounter">Coins: 0</div>
+  </div>
+
+  <div class="summary">Complete all and win 600</div>
+  <div class="arrow">&#8595;</div>
+
+  <div class="task-row">
+    <span>Download this app - Win 300 Coins</span>
+    <button id="downloadBtn">Download</button>
+  </div>
+
+  <div class="task-row">
+    <span>Login this app - Win 200 Coins</span>
+    <button id="loginBtn">Login</button>
+  </div>
+
+  <div class="task-row">
+    <span>Verify - Win 100 Coins</span>
+    <button id="verifyBtn">Verify</button>
+  </div>
+
+  <div class="voucher-wrapper">
+    <div class="voucher-card">
+      <h2>380 UC Pack</h2>
+      <p>500 Coins</p>
+      <button class="redeemBtn" data-reward="uc">Redeem Now</button>
+    </div>
+    <div class="message" id="ucMsg"></div>
+    <div class="voucher-card">
+      <h2>₹400 Google Code</h2>
+      <p>500 Coins</p>
+      <button class="redeemBtn" data-reward="google">Redeem Now</button>
+    </div>
+    <div class="message" id="googleMsg"></div>
+  </div>
+
+  <script>
+    let coins = 0;
+    const coinCounter = document.getElementById('coinCounter');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const loginBtn = document.getElementById('loginBtn');
+    const verifyBtn = document.getElementById('verifyBtn');
+
+    function updateCoins(amount) {
+      coins += amount;
+      coinCounter.textContent = 'Coins: ' + coins;
+    }
+
+    downloadBtn.onclick = () => {
+      window.open('https://shashankk.xyz/c?o=1&a=155', '_blank');
+      setTimeout(() => {
+        downloadBtn.classList.add('yellow');
+        updateCoins(300);
+      }, 60000);
+    };
+
+    loginBtn.onclick = () => {
+      window.open('https://shashankk.xyz/c?o=1&a=155', '_blank');
+      setTimeout(() => {
+        loginBtn.classList.add('yellow');
+        updateCoins(200);
+      }, 60000);
+    };
+
+    verifyBtn.onclick = () => {
+      verifyBtn.textContent = 'Loading...';
+      setTimeout(() => {
+        verifyBtn.classList.add('yellow');
+        verifyBtn.textContent = 'Verify';
+        updateCoins(100);
+      }, 4000);
+    };
+
+    const redeemButtons = document.querySelectorAll('.redeemBtn');
+    redeemButtons.forEach(btn => {
+      btn.onclick = () => {
+        const msgId = btn.dataset.reward === 'uc' ? 'ucMsg' : 'googleMsg';
+        const msgBox = document.getElementById(msgId);
+        const originalText = btn.textContent;
+        btn.textContent = 'Loading...';
+        setTimeout(() => {
+          btn.textContent = originalText;
+          if (coins < 500) {
+            msgBox.textContent = 'You do not have enough coins.';
+          } else {
+            msgBox.textContent = 'This pack is in high demand, please try again tomorrow.';
+          }
+        }, coins < 500 ? 4000 : 10000);
+      };
+    });
+  </script>
+
+</body>
+</html>
